@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: 'Georgia', serif;
+        background: radial-gradient(circle at top, #ffb6c1, #7a0019);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4a0a15;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.93);
+        padding: 40px;
+        border-radius: 22px;
+        max-width: 540px;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+        z-index: 2;
+        animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-size: 2.6rem;
+        color: #b3002d;
+        margin-bottom: 5px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    .photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid #ff9eb5;
+        margin: 15px auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin-bottom: 12px;
+    }
+
+    .rose {
+        font-size: 3rem;
+        margin: 12px 0;
+        animation: float 2.5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+        100% { transform: translateY(0); }
+    }
+
+    .countdown {
+        font-size: 1.1rem;
+        margin: 15px 0;
+        font-weight: bold;
+        color: #7a0019;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+        margin-top: 10px;
+        width: 70%;
+        font-size: 1rem;
+    }
+
+    button {
+        background: #b3002d;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+        background: #8a0022;
+    }
+
+    .secret {
+        display: none;
+        margin-top: 15px;
+        font-size: 1.05rem;
+        animation: fadeIn 1.5s ease;
+    }
+
+    footer {
+        margin-top: 20px;
+        font-size: 0.95rem;
+        opacity: 0.85;
+    }
+
+    .petal {
+        position: fixed;
+        top: -10%;
+        font-size: 22px;
+        animation: fall linear infinite;
+        z-index: 1;
+        opacity: 0.85;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(110vh) rotate(360deg); }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Background Music -->
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/02/14/audio_9b1c3a06f5.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <h1>Happy Rose Day 🌹</h1>
+    <h2>Gynaeshowri ❤️</h2>
+
+    <!-- 📸 Photo -->
+    <img src="photo.jpg" alt="Our Photo" class="photo">
+
+    <div class="rose">🌹</div>
+
+    <p>
+        Just like a rose blooms quietly, your presence fills my life with warmth and calm.
+        Every moment with you feels meaningful in its own beautiful way.
+    </p>
+
+    <!-- ⏳ Countdown -->
+    <div class="countdown" id="countdown"></div>
+
+    <!-- 🔐 Password -->
+    <input type="password" id="passwordInput" placeholder="Enter secret password">
+    <br>
+    <button onclick="checkPassword()">Unlock Secret</button>
+
+    <!-- 💌 Secret Message -->
+    <div class="secret" id="secretMessage">
+        You are the reason simple days feel special.  
+        No matter where life takes us, a part of my heart will always smile when it thinks of you 🌹
+    </div>
+
+    <footer>
+        With all my love,<br>
+        <strong>— Chinglemba</strong>
+    </footer>
+</div>
+
+<script>
+    // ⏳ Countdown to Rose Day (Feb 7)
+    const roseDay = new Date("February 7, 2026 00:00:00").getTime();
+
+    setInterval(() => {
+        const now = new Date().getTime();
+        const distance = roseDay - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+            "Rose Day arrives in: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+    }, 1000);
+
+    // 🔐 Password Check
+    function checkPassword() {
+        const input = document.getElementById("passwordInput").value;
+        if (input === "Gynaeching") {
+            document.getElementById("secretMessage").style.display = "block";
+        } else {
+            alert("Wrong password 🌹");
+        }
+    }
+
+    // 🌹 Falling Roses
+    function createPetal() {
+        const petal = document.createElement("div");
+        petal.classList.add("petal");
+        petal.innerHTML = "🌹";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = (6 + Math.random() * 6) + "s";
+        document.body.appendChild(petal);
+
+        setTimeout(() => petal.remove(), 12000);
+    }
+
+    setInterval(createPetal, 350);
+</script>
+
+</body>
+</html>
